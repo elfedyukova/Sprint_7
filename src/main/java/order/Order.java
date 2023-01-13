@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Order {
 
-    private String login;
     private String lastName;
     private String firstName;
     private String address;
@@ -14,10 +13,12 @@ public class Order {
     private String comment;
     private Integer rentTime;
     private Integer metroStation;
+    private List<String> color = new ArrayList<String>();
 
-    public Order(String json){
+    public Order(String json) {
 
     }
+
 
     public Order(String firstName, String lastName, String address, Integer metroStation, String phone, Integer rentTime, String deliveryDate, String comment, List color) {
         this.lastName = lastName;
@@ -28,10 +29,8 @@ public class Order {
         this.comment = comment;
         this.rentTime = rentTime;
         this.metroStation = metroStation;
+        this.color = color;
     }
-
-
-    private List<String> color = new ArrayList<String>();
 
     public String getFirstName() {
         return firstName;

@@ -1,0 +1,9 @@
+courier/CourierClient.class
+order/OrderClient.class
+order/OrderAssertions.class
+courier/CourierAssertions.class
+courier/Credentials.class
+courier/Courier.class
+courier/CourierGenerator.class
+common/Client.class
+order/Order.class

@@ -1,6 +1,7 @@
 package courier;
 
 import common.Client;
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
 
@@ -8,7 +9,8 @@ public class CourierClient extends Client {
 
     protected final String ROOT = "/courier";
 
-    public ValidatableResponse createCourier (Courier courier){
+    @Step("Создание курьера")
+    public ValidatableResponse createCourier(Courier courier) {
         return spec()
                 .body(courier)
                 .when()
@@ -16,7 +18,9 @@ public class CourierClient extends Client {
                 .then().log().all();
 
     }
-    public ValidatableResponse loginCourier (Credentials credentials){
+
+    @Step("Авторизация курьера")
+    public ValidatableResponse loginCourier(Credentials credentials) {
         return spec()
                 .body(credentials)
                 .when()
@@ -25,14 +29,15 @@ public class CourierClient extends Client {
 
     }
 
-
-    public void  delete(int courierId) {
+    @Step("Удаление созданного курьера")
+    public void delete(int courierId) {
         String json = String.format("{\"id\": \"%d\"}", courierId);
-         spec()
+        spec()
                 .body(json)
                 .when()
                 .delete(ROOT + "/" + courierId)
                 .then().log().all();
 
     }
+
 }

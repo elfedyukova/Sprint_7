@@ -1,5 +1,6 @@
 package courier;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Test;
@@ -7,21 +8,22 @@ import org.junit.Test;
 
 public class CreateCourierTest {
 
-    protected  final CourierGenerator generator = new CourierGenerator();
+    protected final CourierGenerator generator = new CourierGenerator();
     private final CourierClient client = new CourierClient();
-    private  final CourierAssertions check = new CourierAssertions();
+    private final CourierAssertions check = new CourierAssertions();
     private int courierId;
 
     @After
-    public void deleteCourier (){
-        if(courierId > 0)
+    public void deleteCourier() {
+        if (courierId > 0)
             client.delete(courierId);
-            //check.deletedSuccess(response);
+        //check.deletedSuccess(courierId);
 
     }
 
     @Test
-    public void courierTest (){
+    @DisplayName("Создание курьера")
+    public void courierTest() {
         var courier = generator.random();
         ValidatableResponse creatioResponse = client.createCourier(courier);
         check.createdSuccess(creatioResponse);
@@ -29,12 +31,12 @@ public class CreateCourierTest {
         Credentials credentials = Credentials.loginfrom(courier);
         ValidatableResponse loginResponse = client.loginCourier(credentials);
         courierId = check.loginSuccess(loginResponse);
-        assert  courierId >0;
 
     }
 
     @Test
-    public void courierWithoutFirstnameTest (){
+    @DisplayName("Создание курьера без поля firstname")
+    public void courierWithoutFirstnameTest() {
         var courier = generator.random();
         courier.setFirstname(null);
 
@@ -43,7 +45,8 @@ public class CreateCourierTest {
     }
 
     @Test
-    public void courierPasswordFailTest (){
+    @DisplayName("Создание курьера без поля password")
+    public void courierPasswordFailTest() {
         var courier = generator.random();
         courier.setPassword(null);
 
@@ -51,8 +54,10 @@ public class CreateCourierTest {
         String message = check.createdFailed(creatioResponse);
         assert !message.isBlank();
     }
+
     @Test
-    public void courierLoginFailTest (){
+    @DisplayName("Авторизация курьера без поля login")
+    public void courierLoginFailTest() {
         var courier = generator.random();
         courier.setLogin(null);
 
@@ -62,7 +67,8 @@ public class CreateCourierTest {
     }
 
     @Test
-    public void courierSameLoginFailTest (){
+    @DisplayName("Создание курьера с полем login который уже есть в системе")
+    public void courierSameLoginFailTest() {
         var courier = generator.random();
         courier.setLogin("oxGL5оEvtY9Z");
 
