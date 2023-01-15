@@ -21,5 +21,4 @@ public class GetOrdersTest extends Client {
 
     }
 
-
 }

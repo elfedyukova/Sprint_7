@@ -77,9 +77,6 @@ public class CreateCourierTest {
         assert !message.isBlank();
     }
 
-
 }
-
-
 
 
