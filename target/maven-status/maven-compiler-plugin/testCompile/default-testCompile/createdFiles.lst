@@ -1,0 +1,6 @@
+order/CreateOrderTest.class
+order/GetOrdersTest.class
+courier/LoginCourierTest.class
+common/ClientTest.class
+courier/CreateCourierTest.class
+courier/DeleteCourierTest.class
